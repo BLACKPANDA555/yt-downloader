@@ -7,3 +7,4 @@ markdown-it-py==3.0.0
 redis==6.2.0
 yt-dlp==2025.6.9
 ffmpeg-python
+gunicorn
