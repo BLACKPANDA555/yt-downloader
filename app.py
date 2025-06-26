@@ -16,7 +16,13 @@ def index():
     if request.method == 'POST':
         url = request.form.get('url', '').strip()
 
-        ydl_opts = {'quiet': True}
+        ydl_opts = {
+                'quiet': True,
+                'nocheckcertificate': True,
+                'geo_bypass': True,
+                # optionally force a specific country, e.g. India:
+                # 'geo_bypass_country': 'IN',
+            }
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info_dict = ydl.extract_info(url, download=False)
