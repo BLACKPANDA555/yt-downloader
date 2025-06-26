@@ -15,14 +15,20 @@ def index():
 
     if request.method == 'POST':
         url = request.form.get('url', '').strip()
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+
 
         ydl_opts = {
-                'quiet': True,
-                'nocheckcertificate': True,
-                'geo_bypass': True,
-                # optionally force a specific country, e.g. India:
-                # 'geo_bypass_country': 'IN',
-            }
+                        'quiet': True,
+                        'nocheckcertificate': True,
+                        'geo_bypass': True,
+                        'http_headers': {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+                        },
+                        'sleep_interval_requests': 0.5,    # wait 0.5s between web requests
+                        'sleep_interval': 0.5,             # wait 0.5s after downloads
+                    }
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info_dict = ydl.extract_info(url, download=False)
