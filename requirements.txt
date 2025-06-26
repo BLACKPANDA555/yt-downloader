@@ -1,4 +1,4 @@
-
+requests
 Flask==3.1.1
 Flask-Limiter==3.5.0
 Jinja2==3.1.6
